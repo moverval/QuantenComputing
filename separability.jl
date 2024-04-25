@@ -45,6 +45,8 @@ module Separability
         return 2^n > ((x-1) % 2^(n+1))
     end
 
+    # Gibt zurück welche Q-Bits separierbar sind
+    # Beispiel: separable(bell ⊗ k1) == [false, false, true]
     separable(vec::Vector) = begin
         ex = round(log(length(vec))/log(2))
         result = []
@@ -58,12 +60,10 @@ module Separability
                     other = convert(Int, round(x + 2^n))
                     if lambda == Inf || lambda == -Inf
                         if !floateq(0, vec[x])
-                            # println("[I$x] $(vec[x]) not separable with [I$(convert(Int, round(x + 2^n)))] $(vec[convert(Int, round(x + 2^n))]) with lambda $(lambda)")
                             sep = false
                             break
                         end
                     elseif !floateq(lambda * vec[x], vec[other])
-                        # println("[I$x] $(vec[x]) not separable with [I$(convert(Int, round(x + 2^n)))] $(vec[convert(Int, round(x + 2^n))]) with lambda $(lambda)")
                         sep = false
                         break
                     end
