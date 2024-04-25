@@ -23,3 +23,5 @@ import Base.abs
 Base.abs(x::Vector) = sqrt(sum(x .^ 2))
 
 RY(α) = [cos(α) -sin(α); sin(α) cos(α)] 
+
+C(x::Vector) = 2 * abs(x[1] * x[4] - x[2] * x[3])
