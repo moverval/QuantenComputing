@@ -83,6 +83,9 @@ module Separability
     # Separiert den Gesamtzustand in Einzelteile
     # Beispiel: separate(a ⊗ b, 1) = a
     # Beispiel: separate(a ⊗ b, 2) = b
+    #
+    # Wenn seperable(a) auf dem xten index ein true zurück gibt
+    # ist der Rückgabewert von separate(a, x) korrekt
     separate(input::Vector, n::Int) = begin
         ex = convert(Int, round(log(length(input))/log(2)))
         vec = [0, 1]
