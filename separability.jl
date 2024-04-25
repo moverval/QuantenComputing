@@ -32,7 +32,7 @@ module Separability
 
         # Es scheinen keine zwei Nummern (in einem paar) zu existieren,
         # möglicherweise gibt es aber noch eine nummer welche nun entscheidet ob nun
-        # der Vektor [0, 1] oder [1, 0] existiert
+        # der Vektor [0, 1] oder [1, 0] tensoriert wurde
         for (x, _) in enumerate(vec)
             if x-1 < convert(Int, round(2^ex - 2^n))
                 if partofportion(x, n)
@@ -70,7 +70,7 @@ module Separability
         ex = convert(Int, round(log(length(vec))/log(2)))
         result = []
 
-        for n in 0:(ex-1)
+        for n in (ex-1):-1:0
             lambda = findlambda(vec, n)
             sep = true
 
@@ -100,14 +100,14 @@ module Separability
             end
         end
 
-        return reverse(result)
+        return result
     end
 
     # Separiert den Gesamtzustand in Einzelteile
     # Beispiel: separate(a ⊗ b, 1) == a
     # Beispiel: separate(a ⊗ b, 2) == b
     #
-    # Wenn seperable(a) auf dem xten index ein true zurück gibt
+    # Wenn seperable(a) auf dem xten index wahr zurück gibt
     # ist der Rückgabewert von separate(a, x) korrekt
     separate(input::Vector, n::Int) = begin
         ex = convert(Int, round(log(length(input))/log(2)))
