@@ -18,4 +18,8 @@ end
     return vec
 end
 
+import Base.abs
+
+Base.abs(x::Vector) = sqrt(sum(x .^ 2))
+
 RY(α) = [cos(α) -sin(α); sin(α) cos(α)] 

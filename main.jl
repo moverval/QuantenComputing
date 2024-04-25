@@ -3,7 +3,7 @@ include("constants.jl")
 include("separability.jl")
 include("control.jl")
 
-import .Separability.separable
+import .Separability.separable, .Separability.separate, .Separability.findlambda
 import .Control.control, .Control.cntl
 
 # Ein normales CNOT ist das gleiche wie ein kontrolliertes rX Gatter

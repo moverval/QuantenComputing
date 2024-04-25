@@ -1,8 +1,9 @@
 module Separability
+    include("core.jl")
     # Implementation nach Übung 4, Aufgabe 2
     # Es gilt
     # $$(\forall(n\in{\mathbb{N}_0}|2^n<2^3)\exists\lambda\in{\mathbb{R}}\forall(x\in{\mathbb{N}_0}|x\lt(2^3-2^n)\land(2^{n}>(x\mod{2^{n+1}}))|(\ket{x}_3=\lambda\ket{x+2^n}_3))$$
-    export separable
+    export separable, separate, findlambda
     floateq(x, y) = abs(x - y) <= 1e-4
 
     # Das richtige Lambda für die Separabilität zu finden ist nicht so trivial wie man
@@ -77,5 +78,22 @@ module Separability
         end
 
         return reverse(result)
+    end
+
+    # Separiert den Gesamtzustand in Einzelteile
+    # Beispiel: separate(a ⊗ b, 1) = a
+    # Beispiel: separate(a ⊗ b, 2) = b
+    separate(input::Vector, n::Int) = begin
+        ex = convert(Int, round(log(length(input))/log(2)))
+        vec = [0, 1]
+        lambda = findlambda(input, ex - n)
+
+        if lambda != Inf && lambda != -Inf
+            vec = [1, lambda]
+        elseif lambda == -Inf
+            vec = [0, -1]
+        end
+
+        return vec / abs(vec)
     end
 end
