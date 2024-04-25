@@ -129,7 +129,7 @@ module Separability
     #
     # Beispiel: resolve(k0 ⊗ k1) == hcat(k0, k1)
     # Beispiel: resolve(km ⊗ bell ⊗ kp) == hcat(km, [0, 0], [0, 0], kp)
-    resolve(input::Vector) = begin
+    rs = resolve(input::Vector) = begin
         ex = convert(Int, round(log(length(input))/log(2)))
         result = zeros((2, ex))
         valid = separable(input)
