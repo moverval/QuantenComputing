@@ -3,6 +3,7 @@ include("constants.jl")
 include("separability.jl")
 include("control.jl")
 include("bloch.jl")
+include("latex.jl")
 
 import .Separability.separable, .Separability.separate, .Separability.findlambda, .Separability.rs
 import .Control.control, .Control.cntl
