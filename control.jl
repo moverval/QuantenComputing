@@ -31,11 +31,15 @@ module Control
     # mat: Transformation auf das zu mutierende Q-Bit
     #
     # Führt eine kontrollierte Transformation auf ein Q-Bit aus
+    #
+    # Beispiel: cntl(2, 1, 2, pX) == CNOT
+    # Beispiel: cntl(2, 1, 2, RY(pi/2)) * (k0 ⊗ k1) == k0 ⊗ k1
+    # Beispiel: cntl(2, 1, 2, RY(pi/2)) * (k1 ⊗ k1) == k1 ⊗ (RY(pi/2)*k1)
     cntl = control(qb, from, to, mat) = begin
         result = zeros(2 ^ qb, 2 ^ qb)
 
         for i in 0:(2^qb-1)
-            chain = bitchain(zeros(2^(qb-1)), i)
+            chain = bitchain(zeros(qb), i)
             chain = reverse(chain)
             vec = [1]
 
@@ -55,7 +59,7 @@ module Control
                 end
             end
 
-            result[1:2^2, i+1] = vec
+            result[1:2^qb, i+1] = vec
         end
 
         return result
