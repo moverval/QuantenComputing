@@ -1,11 +1,11 @@
 include("core.jl")
 include("constants.jl")
-include("separability.jl")
+include("separate.jl")
 include("control.jl")
 include("bloch.jl")
 include("latex.jl")
 
-import .Separability.separable, .Separability.separate, .Separability.findlambda, .Separability.rs
+import .Separate.separable, .Separate.separate, .Separate.findlambda, .Separate.rs
 import .Control.control, .Control.cntl
 
 # Ein normales CNOT ist das gleiche wie ein kontrolliertes rX Gatter
