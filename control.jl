@@ -23,7 +23,7 @@ module Control
             vec = [1]
 
             for (x, c) in enumerate(chain)
-                if chain[from] != 0 && to == x
+                if chain[from] && to == x
                     if c
                         vec = vec ⊗ (mat * k1)
                     else
