@@ -63,11 +63,7 @@ module Separate
                     end
 
                     if !floateq(vec[other], 0)
-                        if vec[other] > 0
-                            return Inf
-                        else
-                            return -Inf
-                        end
+                        return Inf
                     end
                 end
             else
