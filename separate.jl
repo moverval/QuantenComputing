@@ -32,6 +32,8 @@ module Separate
 
     # Das richtige Lambda für die Separabilität zu finden ist nicht so trivial wie man
     # vorerst denkt. Hier wird in immer weniger Information kaskadiert bis letztendlich 0 zurückgegeben wird
+    # Wichtig: Nachdem die Wahrscheinlichkeiten zusammen tensoriert wurden ist es unmöglich den einzelnen globalen Status
+    # von einem Q-Bit wiederherzustellen. Aus diesem Grund ist das Lambda bei verlorener Information immer positiv
     findlambda(state::State, n::Int) = begin
         vec = state.vector;
         ex = state.ex;
