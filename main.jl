@@ -5,10 +5,13 @@ include("separate.jl")
 include("control.jl")
 include("bloch.jl")
 include("latex.jl")
+include("deutsch.jl")
+include("measure.jl")
 
 import .Separate.separable, .Separate.separate, .Separate.findlambda, .Separate.rs
 import .Control.control, .Control.cntl
 import .Notation.ket
+import .Measure.measure
 
 # Ein normales CNOT ist das gleiche wie ein kontrolliertes rX Gatter
 CNOT = cntl(2, 1, 2, Px)

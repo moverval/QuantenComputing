@@ -43,4 +43,16 @@ module Control
 
         return result
     end
+
+    import Base.xor
+
+    Base.xor(x::Vector, y::Vector)::Vector = begin
+        n = (abs(x - k1) < 1e-4 && abs(y - k1) < 1e-4) || (abs(x - k0) < 1e-4 && abs(y - k0) < 1e-4)
+
+        if n
+            return k0
+        else
+            return k1
+        end
+    end
 end

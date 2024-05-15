@@ -49,4 +49,12 @@ module Notation
 
         return result
     end
+
+    ket(constraint::Bool) = begin
+        if constraint
+            return k1
+        else
+            return k0
+        end
+    end
 end

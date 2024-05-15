@@ -22,7 +22,7 @@ module Separate
     struct QBit
         state::State
         n::Int
-        lambda::Complex
+        lambda::Float64
 
         QBit(state::State, index::Int) = begin
             n = state.ex - index
