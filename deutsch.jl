@@ -29,17 +29,19 @@ module Deutsch
         return result
     end
 
-    # Deutsch Algorithmus
+    # Deutsch-Jozsa Algorithmus
     # Erfordert ein Orakel welches mit `oracle` generiert werden kann.
     # Für Verständnis, siehe Skript Seite 42 bis 43.
-    alg(oracle::Matrix)::Vector = begin
-        return alg(oracle, convert(Int, log(2, size(oracle, 1))))
+    # Kann auch für Bernstein-Vazirani Algorithmus verwendet werden.
+    run(oracle::Matrix)::Vector = begin
+        return run(oracle, convert(Int, log(2, size(oracle, 1))))
     end
 
-    # Deutsch Algorithmus
+    # Deutsch-Jozsa Algorithmus
     # Erfordert ein Orakel welches mit `oracle` generiert werden kann.
     # Für Verständnis, siehe Skript Seite 42 bis 43.
-    alg(oracle::Matrix, qbits::Int)::Vector = begin
+    # Kann auch für Bernstein-Vazirani Algorithmus verwendet werden.
+    run(oracle::Matrix, qbits::Int)::Vector = begin
         Hm = H
         Pv = kp
 

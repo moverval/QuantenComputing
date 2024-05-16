@@ -18,10 +18,3 @@ CNOT = cntl(2, 1, 2, Px)
 
 # Ein CNOT Gatter welches Q-Bit 2 für die Aktivierung und 1 für die Manipulation nutzt.
 CNOT2to1 = cntl(2, 2, 1, Px)
-
-S = [
-    1 0 0 0;
-    0 0 1 0;
-    0 1 0 0;
-    0 0 0 1
-]
