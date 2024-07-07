@@ -6,7 +6,7 @@
 module Separate
     include("core.jl")
 
-    export State, QBit, separable, separate, findlambda, resolve
+    export State, QBit, separable, separate, findlambda, resolve, ignore_last
 
     floateq(x, y) = abs(x - y) <= 1e-4
 
@@ -230,5 +230,19 @@ module Separate
         else
             return [0, 0]
         end
+    end
+
+    ignore_last(chain::Vector) = begin
+        vec = []
+
+        for (i, item) in enumerate(chain)
+            if i % 2 == 0
+                continue
+            end
+
+            append!(vec, sqrt(2) * item)
+        end
+
+        return vec
     end
 end

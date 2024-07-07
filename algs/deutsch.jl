@@ -1,13 +1,15 @@
 module Deutsch
-    include("core.jl")
-    include("constants.jl")
-    include("control.jl")
-    include("notation.jl")
-    include("separate.jl")
+    include("../core.jl")
+    include("../constants.jl")
+    include("../control.jl")
+    include("../notation.jl")
+    include("../separate.jl")
+
+    using LinearAlgebra
 
     import .Notation.ket
 
-    export oracle, alg
+    export oracle, alg, bernstein
 
     # Erstellt die Transformation zu der Funktion welche überprüft werden soll.
     # Leider befinden wir uns hier in einer makroskopischen Welt, aus diesem Grund
@@ -50,7 +52,16 @@ module Deutsch
             Pv = Pv ⊗ kp
         end
 
-        result = (Hm ⊗ I) * oracle * (Pv ⊗ km)
-        return ket(Separate.separate(result)[:, 1:end-1])
+        result = (Hm ⊗ [1 0; 0 1]) * oracle * (Pv ⊗ km)
+        return result
+    end
+
+    # Erzeugt eine i'te Funktion welche nach dem Bernstein-Vazirani Algorithmus
+    # wieder aufgelößt werden kann
+    #
+    # Beispiel: rs(run(oracle(bernstein(3, 2), 3))) == [0 0 sqrt(2); 1 1 -sqrt(2)]
+    bernstein(index::Int, inputs::Int) = begin
+        a = Notation.bitchain(zeros(inputs), index)
+        return x -> (a ⋅ Notation.bitchain(zeros(inputs), x)) % 2 == 1
     end
 end

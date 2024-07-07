@@ -5,8 +5,13 @@ include("separate.jl")
 include("control.jl")
 include("bloch.jl")
 include("latex.jl")
-include("deutsch.jl")
 include("measure.jl")
+include("fourier.jl")
+include("local.jl")
+
+include("algs/deutsch.jl")
+include("algs/grover.jl")
+include("algs/guessinggame.jl")
 
 import .Separate.separable, .Separate.separate, .Separate.findlambda, .Separate.rs
 import .Control.control, .Control.cntl

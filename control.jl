@@ -16,10 +16,10 @@ module Control
     # Beispiel: cntl(2, 1, 2, pX) == CNOT
     # Beispiel: cntl(2, 1, 2, RY(pi/2)) * (k0 ⊗ k1) == k0 ⊗ k1
     cntl = control(qb, from, to, mat) = begin
-        result = zeros(2 ^ qb, 2 ^ qb)
+        result = zeros(eltype(mat), 2 ^ qb, 2 ^ qb)
 
         for i in 0:(2^qb-1)
-            chain = bitchain(zeros(qb), i)
+            chain = bitchain(zeros(eltype(mat), qb), i)
             vec = [1]
 
             for (x, c) in enumerate(chain)
@@ -54,5 +54,28 @@ module Control
         else
             return k1
         end
+    end
+
+    SWAP(n) = begin
+        N = 2^n
+        M = zeros((N, N))
+        for i in 1:N
+            chain = bitchain(zeros(n), i-1)
+            vec = []
+            
+            for j in 1:N
+                chain2 = reverse(bitchain(zeros(n), j-1))
+                
+                if chain == chain2
+                    append!(vec, 1)
+                else
+                    append!(vec, 0)
+                end
+            end
+
+            M[:, i] = vec
+        end
+
+        return M
     end
 end
